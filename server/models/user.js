@@ -2,7 +2,7 @@
 const bcrypt = require('bcrypt');
 
 module.exports = function(sequelize, DataTypes) {
-  var User = sequelize.define('user', {
+  let User = sequelize.define('user', {
     googleId: DataTypes.STRING,
     picture: DataTypes.STRING,
     token: DataTypes.STRING,
@@ -28,21 +28,21 @@ module.exports = function(sequelize, DataTypes) {
           name:'admin',
           password:'admin',
           isAdmin:true
-        })
+        });
       }
-    })
-    return null
-  })
+    });
+    return null;
+  });
 
   //returns Promise(isValid:boolean)
   User.checkPassword = (plainTextPassword, hash) => {
     return bcrypt.compare(plainTextPassword, hash);
-  }
+  };
 
   //returns Promise(hash:string)
   User.generateHash = (plainTextPassword) => {
     return bcrypt.hash(plainTextPassword, 12/*salt rounds*/);
-  }
+  };
 
   User.getIsAdmin = (email) =>{
     return new Promise((resolve,reject)=>{
@@ -53,12 +53,12 @@ module.exports = function(sequelize, DataTypes) {
           }
         }
       ).catch(error => {
-        reject(new Error('Mail for Good couldn\'t access the database.'))
+        reject(new Error('Mail for Good couldn\'t access the database.'));
       }).then(user =>{
-        resolve(user.isAdmin)
-      })
-    })
-  }
+        resolve(user.isAdmin);
+      });
+    });
+  };
 
   User.checkIfUserExists = (email) => {
     return new Promise((resolve, reject)=>{
@@ -69,26 +69,26 @@ module.exports = function(sequelize, DataTypes) {
           }
         }
       ).catch(error =>{
-        reject(new Error('Mail for Good couldn\'t access the database.'))
+        reject(new Error('Mail for Good couldn\'t access the database.'));
       }).then(user =>{
         if(user){
-          resolve(true)
+          resolve(true);
         }else{
-          resolve(false)
+          resolve(false);
         }
-      })
-    })
-  }
+      });
+    });
+  };
 
   User.createOne = async (userObject) => {
-    const hash = await User.generateHash(userObject.password)
+    const hash = await User.generateHash(userObject.password);
     return User.create({
       email:userObject.email,
       name:userObject.email,
       password:hash,
       isAdmin:userObject.isAdmin,
-    })
-  }
+    });
+  };
 
 
   return User;

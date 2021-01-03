@@ -1,6 +1,6 @@
 'use strict';
 module.exports = function(sequelize, DataTypes) {
-  var campaignanalytics = sequelize.define('campaignanalytics', {
+  const campaignanalytics = sequelize.define('campaignanalytics', {
     complaintCount: { type: DataTypes.INTEGER, defaultValue: 0 },
     permanentBounceCount: { type: DataTypes.INTEGER, defaultValue: 0 },
     transientBounceCount: { type: DataTypes.INTEGER, defaultValue: 0 },
