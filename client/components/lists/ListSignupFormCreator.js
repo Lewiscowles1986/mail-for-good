@@ -79,6 +79,7 @@ export class ListSignupFormCreatorComponent extends React.Component {
 
 ListSignupFormCreatorComponent.propTypes = {
   notify: PropTypes.func.isRequired,
+  showModal: PropTypes.boolean,
   subscribeKey: PropTypes.string
 };
 

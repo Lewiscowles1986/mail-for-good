@@ -107,11 +107,10 @@ export default class ManageSubscribersTable extends Component {
   customExportCSVButton() {
     return (
       <ExportCSVButton
-      btnText='Export all to CSV'
+      btnText="Export all to CSV"
       onClick={this.onExportToCSV.bind(this)}
-      >
-      </ExportCSVButton>
-    )
+       />
+    );
   }
 
   render() {
