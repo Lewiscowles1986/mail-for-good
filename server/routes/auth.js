@@ -8,7 +8,7 @@ module.exports = (app, passport) => {
     };
 
     if(process.env.GOOGLE_CONSUMER_KEY !== undefined){
-      strategies.google = true
+      strategies.google = true;
     }
     res.render(path.resolve('public/index.pug'), {strategies});
   });
@@ -28,7 +28,7 @@ module.exports = (app, passport) => {
   app.post('/auth/local/login',bodyParser.urlencoded({extended:true}), function(req,res,next){
     passport.authenticate('local-login',function(err,user,info){
       if(err){
-        res.status(401).json({error:err})
+        res.status(401).json({error:err});
       }
 
       if(user){
@@ -37,8 +37,8 @@ module.exports = (app, passport) => {
             return next(loginErr);
           }
           return res.redirect('/');
-        })
+        });
       }
-    })(req,res,next)
-  })
+    })(req,res,next);
+  });
 };
