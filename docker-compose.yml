@@ -2,6 +2,8 @@ version: '3.6'
 services:
     postgres:
         image: postgres:9.6.3
+        ports:
+            - "5442:5432"
     redis:
         image: redis:4.0
     app:
@@ -22,4 +24,3 @@ services:
             - redis
         ports:
             - "80:8080"
-        command: sh -c "/wait && npm start"
