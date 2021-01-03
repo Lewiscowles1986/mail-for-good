@@ -12,7 +12,7 @@ module.exports = function(req, res) {
     region: `eu-west-1`
   });
 
-  var receiveMessageParams = {
+  let receiveMessageParams = {
     QueueUrl: process.env.AWS_SQS_QUEUE_URL,
     WaitTimeSeconds: 20,
     MaxNumberOfMessages: 10
@@ -36,7 +36,7 @@ module.exports = function(req, res) {
 
         if (email && email.notificationType && email.mail && email.mail.messageId ) {
 
-          const notificationType = email.notificationType
+          const notificationType = email.notificationType;
           let bounceType = '';
           let bounceSubType = '';
           if (notificationType === 'Bounce' && email.bounce) {
@@ -63,7 +63,7 @@ module.exports = function(req, res) {
               if (notificationType === 'Bounce') {
                 recentStatus = 'bounce:';
                 if (bounceType === 'Permanent') {
-                  incrementField = 'permanentBounceCount'
+                  incrementField = 'permanentBounceCount';
                   recentStatus += 'permanent';
                 } else if (bounceType === 'Transient') {
                   incrementField = 'transientBounceCount';
@@ -73,7 +73,7 @@ module.exports = function(req, res) {
                   recentStatus = 'undetermined';
                 }
               } else if (notificationType === 'Complaint') {
-                incrementField = 'complaintCount'
+                incrementField = 'complaintCount';
                 recentStatus = 'complaint';
               }
 
@@ -83,7 +83,7 @@ module.exports = function(req, res) {
                 }).then(ParentCampaignAnalytics => {
                   return ParentCampaignAnalytics.increment(incrementField);
                 }).then(result => {
-                  return ListSubscriber.findById(updatedCampaignSubscriber.dataValues.listsubscriberId)
+                  return ListSubscriber.findById(updatedCampaignSubscriber.dataValues.listsubscriberId);
                 }).then(listSubscriber => {
                   listSubscriber.mostRecentStatus = recentStatus;
                   return listSubscriber.save();
@@ -95,15 +95,15 @@ module.exports = function(req, res) {
             sqs.deleteMessage({
               QueueUrl: receiveMessageParams.QueueUrl,
               ReceiptHandle: message.ReceiptHandle
-            }, deleteMessageCallback)
-          })
+            }, deleteMessageCallback);
+          });
         }
-      })
+      });
     }
 
     getMessages();
   }
 
   getMessages();
-}
+};
 

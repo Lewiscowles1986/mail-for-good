@@ -11,4 +11,4 @@ module.exports = (req, res) => {
     // -- if results empty -> err
     res.status(200).send("You have been unsubscribed from this mailing list.");
   });
-}
+};
