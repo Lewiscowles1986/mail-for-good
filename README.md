@@ -17,7 +17,7 @@ Mail for Good is fast and memory efficient, currently sending over 100 emails pe
 We've used Mail for Good to deliver newsletters to hundreds of thousands of campers per week.
 
 ## Sounds good? Give it a try!
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://dashboard.heroku.com/new?button-url=https%3A%2F%2Fgithub.com%2F&template=https%3A%2F%2Fgithub.com%2FLewiscowles1986%2Fmail-for-good)
 
 "My instance is deployed, what now?"
 
