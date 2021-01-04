@@ -4,9 +4,9 @@ const geoip = require('geoip-lite');
 const CampaignAnalyticsLink = require('../../models').campaignanalyticslink;
 const CampaignAnalytics = require('../../models').campaignanalytics;
 
-console.log("Clickthrough tracking: Make sure that geoip data has been downloaded: ")
-console.log("   $ cd node_modules/geoip-lite")
-console.log("   $ npm run-script updatedb")
+console.log("Clickthrough tracking: Make sure that geoip data has been downloaded: ");
+console.log("   $ cd node_modules/geoip-lite");
+console.log("   $ npm run-script updatedb");
 
 
 module.exports = function(req, res) {
@@ -50,7 +50,7 @@ module.exports = function(req, res) {
         });
       });
     }
-  })
+  });
 
   res.redirect(req.query.url);
-}
+};

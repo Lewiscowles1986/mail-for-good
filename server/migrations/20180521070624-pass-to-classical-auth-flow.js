@@ -13,7 +13,7 @@ module.exports = {
         'isAdmin',
         Sequelize.BOOLEAN
       )
-    ])
+    ]);
   },
 
   down: (queryInterface, Sequelize) => {
@@ -28,6 +28,6 @@ module.exports = {
         'isAdmin',
         Sequelize.BOOLEAN
       )
-    ])
+    ]);
   }
 };

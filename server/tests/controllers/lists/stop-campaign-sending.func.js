@@ -6,6 +6,7 @@ const publisher = require("fakeredis").createClient('1');
 const subscriber = require("fakeredis").createClient('1');
 const redis = { publisher, subscriber };
 
+const sleep = require('../../../utils/sleep');
 const stopCampaignSending = require('../../../controllers/campaign/stop-campaign-sending');
 
 const {
@@ -76,6 +77,7 @@ test('Stop campaign validates that the campaign belongs to the user', async func
 
 async function beforeEachStopSendCampaign() {
   await sequelize.sync({ force: true });
+  await sleep(5000);
   await User.create({id: 1});
   await Campaign.create({
     name: 'campaign1',

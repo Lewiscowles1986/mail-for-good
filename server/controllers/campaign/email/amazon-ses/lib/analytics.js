@@ -16,7 +16,7 @@ function wrapLink(body, trackingId, type, whiteLabelUrl) {
 
   body = body.replace(/\{(.+?)\/(.+?)\}/g, function(m, label, url) {
 
-    return `<a href="${host}/clickthrough?url=${url}&trackingId=${trackingId}">${label}</a>`
+    return `<a href="${host}/clickthrough?url=${url}&trackingId=${trackingId}">${label}</a>`;
   });
   return body;
 }
@@ -30,7 +30,7 @@ function insertUnsubscribeLink(body, unsubscribeId, type, whiteLabelUrl) {
     return body + '\t\r\n\t\r\n\t\r\n\t\r\n\t\r\n\t\r\n' + unsubscribeUrl;
   }
 
-  return body + "<br/><br/><br/><br/><br/>" + `<a href="${unsubscribeUrl}">unsubscribe</a>`
+  return body + "<br/><br/><br/><br/><br/>" + `<a href="${unsubscribeUrl}">unsubscribe</a>`;
 }
 
 function insertTrackingPixel(body, trackingId, type, whiteLabelUrl) {
@@ -41,11 +41,11 @@ function insertTrackingPixel(body, trackingId, type, whiteLabelUrl) {
   }
 
   return body +
-    `\n<img src="${host}/trackopen?trackingId=${trackingId}" style="display:none">`
+    `\n<img src="${host}/trackopen?trackingId=${trackingId}" style="display:none">`;
 }
 
 module.exports = {
   wrapLink,
   insertUnsubscribeLink,
   insertTrackingPixel
-}
+};

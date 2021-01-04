@@ -1,6 +1,6 @@
 'use strict';
 module.exports = function(sequelize, DataTypes) {
-  var offerPermission = sequelize.define('offerPermission', {
+  const offerPermission = sequelize.define('offerPermission', {
     toUserId: DataTypes.STRING,
     fromUserEmail: DataTypes.STRING,
     toUserEmail: DataTypes.STRING,

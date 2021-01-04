@@ -1,15 +1,15 @@
 'use strict';
 module.exports = function(sequelize, DataTypes) {
-  var analysisemail = sequelize.define('analysisEmail', {
+  const analysisEmail = sequelize.define('analysisEmail', {
     sesMessageId: DataTypes.STRING,
     email: DataTypes.STRING
   }, {
     classMethods: {
       associate: function(models) {
         // associations can be defined here
-        analysisemail.belongsTo(models.analysis);
+        analysisEmail.belongsTo(models.analysis);
       }
     }
   });
-  return analysisemail;
+  return analysisEmail;
 };

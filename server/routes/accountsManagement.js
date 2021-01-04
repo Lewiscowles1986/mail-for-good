@@ -10,9 +10,9 @@ const { apiIsAuth } = require('./middleware/auth');
 module.exports = function(app) {
   app.post('/api/create-user', apiIsAuth, parseJson, (req, res) => {
     createUser(req,res);
-  })
+  });
 
   app.delete('/api/delete-user', apiIsAuth, parseJson, (req,res) => {
-    deleteUser(req,res)
+    deleteUser(req,res);
   });
 };

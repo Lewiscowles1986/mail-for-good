@@ -1,8 +1,9 @@
 const httpMocks = require('node-mocks-http');
+const fs = require('fs');
 const test = require('tape');
 const path = require('path');
-const exec = require('child_process').exec;
 
+const sleep = require('../../../utils/sleep');
 const importCsv = require('../../../controllers/list/import-csv');
 
 // Constants defining key db fields
@@ -18,7 +19,9 @@ const {
 
 // Make the directory test-csv-files should it not exist
 
-exec(`mkdir ${__dirname + '/test-csv-files'}`);
+if (!fs.existsSync(__dirname + '/test-csv-files')){
+  fs.mkdirSync(__dirname + '/test-csv-files');
+}
 
 /**
 * Main tests
@@ -31,7 +34,7 @@ test('Import CSV function correctly parses a CSV with a single column "email" & 
   const TEST_EMAIL_ARRAY = ['a@a.com', 'b@b.com', 'c@c.com'];
 
   // Write CSV files to ./test-csv-files/10normalemails
-  exec(`rm ${PATH_TO_FILE}; echo "email\n${TEST_EMAIL_ARRAY.join('\n')}" > ${PATH_TO_FILE};`);
+  fs.writeFileSync(PATH_TO_FILE, "email\n${TEST_EMAIL_ARRAY.join('\n')}", {flags:'w+'});
 
   // Clear db & prep for import
   await prepareDbForCsvImports();
@@ -104,7 +107,7 @@ test('Import CSV does not accept malformed CSVs with extra semicolons.', async f
   const TEST_EMAIL_ARRAY = ['a@a.com,,,', 'b@b.com,', 'c@c.com'];
 
   // Write CSV files to ./test-csv-files/10normalemails
-  exec(`rm ${PATH_TO_FILE}; echo "email\n${TEST_EMAIL_ARRAY.join('\n')}" > ${PATH_TO_FILE};`);
+  fs.writeFileSync(PATH_TO_FILE, "email\n${TEST_EMAIL_ARRAY.join('\n')}", {flags:'w+'});
 
   // Clear db & prep for import
   await prepareDbForCsvImports();
@@ -150,6 +153,7 @@ test('Import CSV does not accept malformed CSVs with extra semicolons.', async f
 
 const prepareDbForCsvImports = async () => {
   await sequelize.sync({ force: true });
+  await sleep(5000); // sequelize / postgres bug syncing
   await User.create({
     id: USER_ID,
   });

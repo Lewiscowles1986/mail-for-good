@@ -1,19 +1,26 @@
-postgres:
-    image: postgres:9.6.3
-redis:
-    image: redis:4.0
-app:
-    image: freecodecamp/mail-for-good:stable
-    env_file: .env
-    environment:
-        - PSQL_USERNAME=postgres
-        - PSQL_DATABASE=postgres
-        - PSQL_HOST=postgres
-        - REDIS_HOST=redis
-        - VIRTUAL_HOST=app
-        - VIRTUAL_PORT=8080
-    links:
-        - redis
-        - postgres
-    ports:
-      - "80:8080"
+version: '3.6'
+services:
+    postgres:
+        image: postgres:9.6.3
+        ports:
+            - "5442:5432"
+    redis:
+        image: redis:4.0
+    app:
+        build: .
+        env_file: .env
+        environment:
+            - PSQL_USERNAME=postgres
+            - PSQL_DATABASE=postgres
+            - PSQL_HOST=postgres
+            - REDIS_HOST=redis
+            - VIRTUAL_HOST=app
+            - VIRTUAL_PORT=8080
+        links:
+            - redis
+            - postgres
+        depends_on:
+            - postgres
+            - redis
+        ports:
+            - "80:8080"

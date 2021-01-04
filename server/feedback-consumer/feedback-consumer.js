@@ -13,9 +13,9 @@ module.exports = {
   start,
   stop,
   restart
-}
+};
 
-var consumers = [];
+let consumers = [];
 
 function start() {
   if (!consumers.length) {
@@ -98,7 +98,7 @@ function receiveMessageCallback(message, done) {
   if (email && email.notificationType && email.mail && email.mail.messageId) {
 
     // Construct the fields to update (status and bounceType)
-    const notificationType = email.notificationType
+    const notificationType = email.notificationType;
     let bounceType = '';
     let bounceSubType = '';
     if (notificationType === 'Bounce' && email.bounce) {
@@ -131,7 +131,7 @@ function receiveMessageCallback(message, done) {
         if (notificationType === 'Bounce') {
           recentStatus = 'bounce:';
           if (bounceType === 'Permanent') {
-            incrementField = 'permanentBounceCount'
+            incrementField = 'permanentBounceCount';
             recentStatus += 'permanent';
           } else if (bounceType === 'Transient') {
             incrementField = 'transientBounceCount';
@@ -141,7 +141,7 @@ function receiveMessageCallback(message, done) {
             recentStatus = 'undetermined';
           }
         } else if (notificationType === 'Complaint') {
-          incrementField = 'complaintCount'
+          incrementField = 'complaintCount';
           recentStatus = 'complaint';
         }
 
@@ -151,7 +151,7 @@ function receiveMessageCallback(message, done) {
           }).then(ParentCampaignAnalytics => {
             return ParentCampaignAnalytics.increment(incrementField);
           }).then(result => {
-            return ListSubscriber.findById(updatedCampaignSubscriber.dataValues.listsubscriberId)
+            return ListSubscriber.findById(updatedCampaignSubscriber.dataValues.listsubscriberId);
           }).then(listSubscriber => {
             listSubscriber.mostRecentStatus = recentStatus;
 
@@ -179,6 +179,6 @@ function receiveMessageCallback(message, done) {
       }
     }).catch(err => {
       throw err;
-    })
+    });
   }
 }

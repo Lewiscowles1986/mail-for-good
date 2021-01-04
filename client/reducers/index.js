@@ -8,7 +8,7 @@ import { profile } from './appReducer';
 import settings from './settingsReducer';
 import notifications from './notificationsReducer';
 import { grantPermissions, receivedPermissionOffers, activePermissions, grantOfferedPermissions, activeAccount } from './permissionReducer';
-import {  createAccount ,deleteAccount } from './accountsManagementReducer'
+import {  createAccount ,deleteAccount } from './accountsManagementReducer';
 
 const rootReducer = combineReducers({
   createCampaign,

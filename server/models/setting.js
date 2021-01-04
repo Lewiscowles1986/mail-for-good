@@ -1,5 +1,5 @@
 'use strict';
-const crypto = require('crypto')
+const crypto = require('crypto');
 const algorithm = 'aes-256-ctr';
 const password = process.env.ENCRYPTION_PASSWORD;
 
@@ -8,7 +8,7 @@ if (!password) {
 }
 
 module.exports = function(sequelize, DataTypes) {
-  var setting = sequelize.define('setting', {
+  const setting = sequelize.define('setting', {
     amazonSimpleEmailServiceAccessKey: { type: DataTypes.STRING, defaultValue: '' },
     amazonSimpleEmailServiceSecretKeyEncrypted: { type: DataTypes.STRING, defaultValue: '' },
     amazonSimpleEmailServiceSecretKey: {
@@ -18,8 +18,8 @@ module.exports = function(sequelize, DataTypes) {
       // there is actually no amazonSimpleEmailServiceSecretKey column.
       type: new DataTypes.VIRTUAL(DataTypes.STRING, ['amazonSimpleEmailServiceSecretKeyEncrypted']),
       set: function (val) {
-        const cipher = crypto.createCipher(algorithm,password)
-        let crypted = cipher.update(val,'utf8','hex')
+        const cipher = crypto.createCipher(algorithm,password);
+        let crypted = cipher.update(val,'utf8','hex');
         crypted += cipher.final('hex');
         this.setDataValue('amazonSimpleEmailServiceSecretKeyEncrypted', crypted);
       },

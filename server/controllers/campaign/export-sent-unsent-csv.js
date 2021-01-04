@@ -35,9 +35,7 @@ module.exports = (req, res) => {
         where.sent = false;
       }
 
-      sendSubscribers();
-
-      function sendSubscribers(offset=0, limit=10000) {  // limit is how many rows to hold in memory
+      (function sendSubscribers(offset=0, limit=10000) {  // limit is how many rows to hold in memory
         CampaignSubscriber.findAll({
           where,
           offset,
@@ -56,18 +54,18 @@ module.exports = (req, res) => {
             // Make sure that the response buffer is empty before fetching and sending more
             // rows. Otherwise we will run out of memory by filling up the buffer
             if (res.write(chunk)) {
-              sendSubscribers(offset + limit);
+              sendSubscribers(offset + limit, limit);
             } else {
               res.once('drain', () => {
-                sendSubscribers(offset + limit);
-              })
+                sendSubscribers(offset + limit, limit);
+              });
             }
           } else {
             res.end();
             return;
           }
-        })
-      }
+        });
+      })();
     }
   });
 };

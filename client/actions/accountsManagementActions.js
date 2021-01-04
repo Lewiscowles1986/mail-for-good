@@ -35,11 +35,11 @@ export function postCreateNewUser(newUserData) {
       dispatch(completePostCreateNewUser());
     }).catch(error => {
       console.log('error',error);
-      let errorMessage = error.response.data ? ' : '+error.response.data : ''
+      let errorMessage = error.response.data ? ' : '+error.response.data : '';
       dispatch(notify({ message: 'Couldn\'t create new user'+errorMessage}));
       dispatch(completePostCreateNewUser());
-    })
-  }
+    });
+  };
 }
 
 export function deleteUser(userData) {
@@ -52,9 +52,9 @@ export function deleteUser(userData) {
       dispatch(completeDeleteUser());
     }).catch(error => {
       console.log('error',error);
-      let errorMessage = error.response.data ? ' : '+error.response.data : ''
+      let errorMessage = error.response.data ? ' : '+error.response.data : '';
       dispatch(notify({ message: 'Couldn\'t delete user'+errorMessage}));
       dispatch(completePostCreateNewUser());
-    })
-m  }
+    });
+  };
 }
